@@ -65,7 +65,6 @@ int main() {
     }
     
     // Cleanup
-    cnp_var_free(x);
     cnp_shape_free(&shape);
     cnp_cleanup();
     

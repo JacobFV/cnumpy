@@ -123,29 +123,25 @@ static void cnp_add_backward(cnp_tensor_t *output, cnp_tensor_t **inputs, size_t
     cnp_tensor_t *b = inputs[1];
     
     if (a->requires_grad) {
-        if (!a->grad) {
-            a->grad = cnp_zeros(&a->shape, a->dtype);
-        }
+        cnp_tensor_t *a_grad = cnp_get_or_create_grad(a);
         // grad_a += grad_output
         if (a->dtype == CNP_FLOAT32) {
-            float *a_grad = (float*)a->grad->data;
+            float *a_grad_data = (float*)a_grad->data;
             float *out_grad = (float*)output->grad->data;
             for (size_t i = 0; i < a->shape.size; i++) {
-                a_grad[i] += out_grad[i];
+                a_grad_data[i] += out_grad[i];
             }
         }
     }
     
     if (b->requires_grad) {
-        if (!b->grad) {
-            b->grad = cnp_zeros(&b->shape, b->dtype);
-        }
+        cnp_tensor_t *b_grad = cnp_get_or_create_grad(b);
         // grad_b += grad_output
         if (b->dtype == CNP_FLOAT32) {
-            float *b_grad = (float*)b->grad->data;
+            float *b_grad_data = (float*)b_grad->data;
             float *out_grad = (float*)output->grad->data;
             for (size_t i = 0; i < b->shape.size; i++) {
-                b_grad[i] += out_grad[i];
+                b_grad_data[i] += out_grad[i];
             }
         }
     }
@@ -257,31 +253,27 @@ static void cnp_mul_backward(cnp_tensor_t *output, cnp_tensor_t **inputs, size_t
     cnp_tensor_t *b = inputs[1];
     
     if (a->requires_grad) {
-        if (!a->grad) {
-            a->grad = cnp_zeros(&a->shape, a->dtype);
-        }
+        cnp_tensor_t *a_grad = cnp_get_or_create_grad(a);
         // grad_a += b * grad_output
         if (a->dtype == CNP_FLOAT32) {
-            float *a_grad = (float*)a->grad->data;
+            float *a_grad_data = (float*)a_grad->data;
             float *b_data = (float*)b->data;
             float *out_grad = (float*)output->grad->data;
             for (size_t i = 0; i < a->shape.size; i++) {
-                a_grad[i] += b_data[i] * out_grad[i];
+                a_grad_data[i] += b_data[i] * out_grad[i];
             }
         }
     }
     
     if (b->requires_grad) {
-        if (!b->grad) {
-            b->grad = cnp_zeros(&b->shape, b->dtype);
-        }
+        cnp_tensor_t *b_grad = cnp_get_or_create_grad(b);
         // grad_b += a * grad_output
         if (b->dtype == CNP_FLOAT32) {
-            float *b_grad = (float*)b->grad->data;
+            float *b_grad_data = (float*)b_grad->data;
             float *a_data = (float*)a->data;
             float *out_grad = (float*)output->grad->data;
             for (size_t i = 0; i < b->shape.size; i++) {
-                b_grad[i] += a_data[i] * out_grad[i];
+                b_grad_data[i] += a_data[i] * out_grad[i];
             }
         }
     }

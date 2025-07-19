@@ -122,6 +122,10 @@ static void cnp_sgd_update_parameters(cnp_tensor_t *tensor, cnp_sgd_params_t *pa
     if (!tensor->op && tensor->requires_grad && tensor->grad) {
         if (params->debug) {
             printf("SGD: Updating tensor %s\n", tensor->name ? tensor->name : "unnamed");
+            printf("SGD: Before update: ");
+            cnp_print_tensor(tensor);
+            printf("SGD: Gradient: ");
+            cnp_print_tensor(tensor->grad);
         }
         
         // Update parameters: param = param - lr * grad
@@ -139,6 +143,11 @@ static void cnp_sgd_update_parameters(cnp_tensor_t *tensor, cnp_sgd_params_t *pa
             for (size_t i = 0; i < tensor->shape.size; i++) {
                 data[i] -= params->lr * grad[i];
             }
+        }
+        
+        if (params->debug) {
+            printf("SGD: After update: ");
+            cnp_print_tensor(tensor);
         }
     }
     

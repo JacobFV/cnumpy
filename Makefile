@@ -9,7 +9,7 @@ BUILD_DIR = build
 EXAMPLE_DIR = examples
 
 # Library source files
-LIB_SOURCES = cnumpy_core.c cnumpy_ops.c cnumpy_scope.c
+LIB_SOURCES = cnumpy_core.c cnumpy_ops.c cnumpy_scope.c rl/cnumpy_rl_core.c rl/cnumpy_rl_env.c rl/cnumpy_rl_agents.c
 LIB_OBJECTS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(LIB_SOURCES))
 
 # Library target
@@ -25,9 +25,10 @@ all: $(LIBRARY) examples
 # Create build directory
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/rl
 
 # Compile library object files
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c cnumpy.h | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c cnumpy.h rl/cnumpy_rl.h | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Create static library
