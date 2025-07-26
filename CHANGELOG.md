@@ -5,45 +5,7 @@ All notable changes to CNmpy RL will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
-
-### Added
-- PPO (Proximal Policy Optimization) algorithm implementation
-- A3C (Asynchronous Advantage Actor-Critic) algorithm
-- SAC (Soft Actor-Critic) algorithm for continuous control
-- TD3 (Twin Delayed Deep Deterministic Policy Gradient) algorithm
-- CartPole environment implementation
-- MountainCar environment implementation
-- Pendulum environment implementation
-- Prioritized experience replay buffer
-- Multi-agent training support
-- Distributed training infrastructure
-- Advanced neural network architectures (CNN, RNN, attention)
-- Real-time visualization and plotting
-- Comprehensive benchmarking suite
-- Performance optimization with SIMD instructions
-- Memory pooling for efficient memory management
-- TensorBoard integration for experiment tracking
-- Hyperparameter optimization framework
-- Model interpretation and explanation tools
-- Python bindings for easier integration
-- Comprehensive test coverage (>95%)
-- Continuous integration and deployment pipelines
-
-### Changed
-- Upgraded build system to CMake for better cross-platform support
-- Enhanced API design for better usability and consistency
-- Improved memory management with reference counting
-- Optimized tensor operations for better performance
-- Restructured project layout for better organization
-
-### Fixed
-- Memory leaks in episode runner and agent cleanup
-- Segmentation faults in multi-threaded environments
-- Numerical stability issues in gradient computation
-- Race conditions in distributed training
-
-## [1.0.0] - 2024-01-15
+## [1.0.0] - 2025-07-25
 
 ### Added
 - Initial release of CNmpy RL

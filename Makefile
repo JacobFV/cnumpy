@@ -12,6 +12,10 @@ EXAMPLE_DIR = examples
 LIB_SOURCES = cnumpy_core.c cnumpy_ops.c cnumpy_scope.c rl/cnumpy_rl_core.c rl/cnumpy_rl_env.c rl/cnumpy_rl_agents.c
 LIB_OBJECTS = $(patsubst %.c,$(BUILD_DIR)/%.o,$(LIB_SOURCES))
 
+# Automatically detect subdirectories from source files
+LIB_SUBDIRS = $(sort $(filter-out ./,$(dir $(LIB_SOURCES))))
+BUILD_SUBDIRS = $(addprefix $(BUILD_DIR)/,$(patsubst %/,%,$(LIB_SUBDIRS)))
+
 # Library target
 LIBRARY = $(BUILD_DIR)/libcnumpy.a
 
@@ -22,10 +26,15 @@ EXAMPLE_TARGETS = $(patsubst $(EXAMPLE_DIR)/%.c,$(BUILD_DIR)/%,$(EXAMPLE_SOURCES
 # Default target
 all: $(LIBRARY) examples
 
-# Create build directory
+# Create build directory and all necessary subdirectories
 $(BUILD_DIR):
+ifeq ($(OS),Windows_NT)
+	powershell -Command "New-Item -Path '$(BUILD_DIR)' -ItemType Directory -Force"
+	$(if $(BUILD_SUBDIRS), powershell -Command "$(foreach dir,$(BUILD_SUBDIRS),New-Item -Path '$(dir)' -ItemType Directory -Force; )")
+else
 	mkdir -p $(BUILD_DIR)
-	mkdir -p $(BUILD_DIR)/rl
+	$(if $(BUILD_SUBDIRS), mkdir -p $(BUILD_SUBDIRS))
+endif
 
 # Compile library object files
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c cnumpy.h rl/cnumpy_rl.h | $(BUILD_DIR)
@@ -47,7 +56,11 @@ test: $(BUILD_DIR)/test_basic
 
 # Clean build artifacts
 clean:
+ifeq ($(OS),Windows_NT)
+	powershell -Command "if (Test-Path '$(BUILD_DIR)') { Remove-Item '$(BUILD_DIR)' -Recurse -Force }"
+else
 	rm -rf $(BUILD_DIR)
+endif
 
 # Install (simple local install)
 install: $(LIBRARY)

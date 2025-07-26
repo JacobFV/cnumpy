@@ -1,11 +1,11 @@
-# CNmpy RL - High-Performance Reinforcement Learning Library for C
+# CNmpy - High-Performance Reinforcement Learning Library for C
 
 [![Build Status](https://github.com/username/cnumpy/workflows/CI/badge.svg)](https://github.com/username/cnumpy/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/username/cnumpy/releases)
-[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://cnumpy-rl.readthedocs.io)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://cnumpy.readthedocs.io)
 
-**CNmpy RL** is a high-performance, production-ready reinforcement learning library implemented in C, designed for research and industrial applications. It provides a comprehensive framework for developing, training, and deploying RL agents with optimal performance and memory efficiency.
+**CNmpy** is a machine and reinforcement learning library implemented in C, designed for research and industrial applications. It provides a comprehensive framework for developing, training, and deploying RL agents with optimal performance and memory efficiency.
 
 ## 🚀 Key Features
 
@@ -54,8 +54,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/username/cnumpy-rl.git
-cd cnumpy-rl
+git clone https://github.com/username/cnumpy.git
+cd cnumpy
 
 # Create build directory
 mkdir build && cd build
@@ -71,25 +71,12 @@ make test
 sudo make install
 ```
 
-### Package Managers
-
-```bash
-# Ubuntu/Debian
-sudo apt-get install libcnumpy-rl-dev
-
-# macOS
-brew install cnumpy-rl
-
-# Arch Linux
-yay -S cnumpy-rl
-```
-
 ## 🚀 Quick Start
 
 ### Simple DQN Training
 
 ```c
-#include <cnumpy_rl.h>
+#include <cnumpy_rl.h> // Make sure this is in your build paths!
 
 int main() {
     // Initialize the library
@@ -392,7 +379,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ```bash
 # Clone with submodules
-git clone --recursive https://github.com/username/cnumpy-rl.git
+git clone --recursive https://github.com/username/cnumpy.git
 
 # Install development dependencies
 ./scripts/setup_dev.sh
@@ -420,7 +407,7 @@ If you use CNmpy RL in your research, please cite:
 @software{cnumpy_rl,
   title = {CNmpy RL: High-Performance Reinforcement Learning Library for C},
   author = {Your Name},
-  url = {https://github.com/username/cnumpy-rl},
+  url = {https://github.com/username/cnumpy},
   version = {1.0.0},
   year = {2024}
 }
@@ -440,11 +427,11 @@ If you use CNmpy RL in your research, please cite:
 
 ## 📞 Support
 
-- **Documentation**: [cnumpy-rl.readthedocs.io](https://cnumpy-rl.readthedocs.io)
-- **Issues**: [GitHub Issues](https://github.com/username/cnumpy-rl/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/username/cnumpy-rl/discussions)
-- **Email**: support@cnumpy-rl.org
-- **Discord**: [CNmpy RL Community](https://discord.gg/cnumpy-rl)
+- **Documentation**: [cnumpy.readthedocs.io](https://cnumpy.readthedocs.io)
+- **Issues**: [GitHub Issues](https://github.com/username/cnumpy/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/username/cnumpy/discussions)
+- **Email**: support@cnumpy.org
+- **Discord**: [CNmpy RL Community](https://discord.gg/cnumpy)
 
 ## 📄 License
 

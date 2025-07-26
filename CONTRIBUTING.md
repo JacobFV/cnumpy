@@ -51,11 +51,11 @@ We welcome many types of contributions:
 
 ```bash
 # Fork the repository on GitHub, then clone your fork
-git clone https://github.com/YOUR_USERNAME/cnumpy-rl.git
-cd cnumpy-rl
+git clone https://github.com/YOUR_USERNAME/cnumpy.git
+cd cnumpy
 
 # Add the upstream repository
-git remote add upstream https://github.com/username/cnumpy-rl.git
+git remote add upstream https://github.com/username/cnumpy.git
 
 # Install development dependencies
 ./scripts/setup_dev.sh
@@ -393,7 +393,7 @@ make format-check
 
 ### Getting Help
 
-- Check the [documentation](https://cnumpy-rl.readthedocs.io)
+- Check the [documentation](https://cnumpy.readthedocs.io)
 - Search existing issues and discussions
 - Ask questions in GitHub Discussions
 - Join our Discord community
