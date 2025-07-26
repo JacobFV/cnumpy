@@ -37,8 +37,8 @@ else
 endif
 
 # Compile library object files
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c cnumpy.h rl/cnumpy_rl.h | $(BUILD_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(SRC_DIR)/cnumpy.h $(SRC_DIR)/rl/cnumpy_rl.h | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -I$(SRC_DIR) -c $< -o $@
 
 # Create static library
 $(LIBRARY): $(LIB_OBJECTS)
@@ -67,12 +67,17 @@ install: $(LIBRARY)
 	mkdir -p /usr/local/lib
 	mkdir -p /usr/local/include
 	cp $(LIBRARY) /usr/local/lib/
-	cp cnumpy.h /usr/local/include/
+	cp $(SRC_DIR)/cnumpy.h /usr/local/include/
 
 # Uninstall
 uninstall:
+ifeq ($(OS),Windows_NT)
+	powershell -Command "if (Test-Path '/usr/local/lib/libcnumpy.a') { Remove-Item '/usr/local/lib/libcnumpy.a' -Force }"
+	powershell -Command "if (Test-Path '/usr/local/include/cnumpy.h') { Remove-Item '/usr/local/include/cnumpy.h' -Force }"
+else
 	rm -f /usr/local/lib/libcnumpy.a
 	rm -f /usr/local/include/cnumpy.h
+endif
 
 # Development targets
 debug: CFLAGS += -DDEBUG -g3
@@ -83,20 +88,20 @@ release: $(LIBRARY) examples
 
 # Static analysis
 analyze:
-	clang-tidy $(LIB_SOURCES) cnumpy.h
+	clang-tidy $(addprefix $(SRC_DIR)/,$(LIB_SOURCES)) $(SRC_DIR)/cnumpy.h
 
 # Format code
 format:
-	clang-format -i $(LIB_SOURCES) cnumpy.h $(EXAMPLE_SOURCES)
+	clang-format -i $(addprefix $(SRC_DIR)/,$(LIB_SOURCES)) $(SRC_DIR)/cnumpy.h $(EXAMPLE_SOURCES)
 
 # Memory check (requires valgrind)
 memcheck: $(BUILD_DIR)/test_basic
 	valgrind --leak-check=full --track-origins=yes $(BUILD_DIR)/test_basic
 
 # Dependencies
-$(BUILD_DIR)/cnumpy_core.o: cnumpy.h
-$(BUILD_DIR)/cnumpy_ops.o: cnumpy.h
-$(BUILD_DIR)/cnumpy_scope.o: cnumpy.h
+$(BUILD_DIR)/cnumpy_core.o: $(SRC_DIR)/cnumpy.h
+$(BUILD_DIR)/cnumpy_ops.o: $(SRC_DIR)/cnumpy.h
+$(BUILD_DIR)/cnumpy_scope.o: $(SRC_DIR)/cnumpy.h
 
 # Help
 help:
