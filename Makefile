@@ -4,7 +4,7 @@ CFLAGS = -std=c99 -Wall -Wextra -O2 -g
 LDFLAGS = -lm
 
 # Directories
-SRC_DIR = .
+SRC_DIR = src
 BUILD_DIR = build
 EXAMPLE_DIR = examples
 

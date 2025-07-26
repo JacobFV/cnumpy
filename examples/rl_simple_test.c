@@ -1,5 +1,5 @@
-#include "../cnumpy.h"
-#include "../rl/cnumpy_rl.h"
+#include "../src/cnumpy.h"
+#include "../src/rl/cnumpy_rl.h"
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,4 +1,4 @@
-#include "../cnumpy.h"
+#include "../src/cnumpy.h"
 #include <stdio.h>
 
 int main() {

@@ -103,25 +103,21 @@ if(ENABLE_COVERAGE)
     )
 endif()
 
-# Source files
-set(CNUMPY_CORE_SOURCES
-    cnumpy_core.c
-    cnumpy_ops.c
-    cnumpy_scope.c
+# Source files - automatically discover all .c files
+file(GLOB CNUMPY_CORE_SOURCES
+    "src/*.c"
 )
 
-set(CNUMPY_RL_SOURCES
-    rl/cnumpy_rl_core.c
-    rl/cnumpy_rl_env.c
-    rl/cnumpy_rl_agents.c
+file(GLOB CNUMPY_RL_SOURCES
+    "src/rl/*.c"
 )
 
 set(CNUMPY_ALL_SOURCES ${CNUMPY_CORE_SOURCES} ${CNUMPY_RL_SOURCES})
 
-# Header files
-set(CNUMPY_HEADERS
-    cnumpy.h
-    rl/cnumpy_rl.h
+# Header files - automatically discover all .h files
+file(GLOB CNUMPY_HEADERS
+    "src/*.h"
+    "src/rl/*.h"
 )
 
 # Create main library
@@ -138,10 +134,10 @@ set_target_properties(cnumpy PROPERTIES
 # Include directories
 target_include_directories(cnumpy
     PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
         $<INSTALL_INTERFACE:include>
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/rl
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/rl
 )
 
 # Link libraries
@@ -208,11 +204,11 @@ install(TARGETS cnumpy
 )
 
 # Install headers
-install(FILES cnumpy.h
+install(FILES src/cnumpy.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cnumpy
 )
 
-install(FILES rl/cnumpy_rl.h
+install(FILES src/rl/cnumpy_rl.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/cnumpy/rl
 )
 
@@ -316,8 +312,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     find_program(CLANG_FORMAT clang-format)
     if(CLANG_FORMAT)
         file(GLOB_RECURSE ALL_SOURCE_FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/*.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/*.h
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
         )
         
         add_custom_target(format
@@ -335,7 +331,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     find_program(CLANG_TIDY clang-tidy)
     if(CLANG_TIDY)
         add_custom_target(tidy
-            COMMAND ${CLANG_TIDY} ${CNUMPY_ALL_SOURCES} -- -I${CMAKE_CURRENT_SOURCE_DIR}
+            COMMAND ${CLANG_TIDY} ${CNUMPY_ALL_SOURCES} -- -I${CMAKE_CURRENT_SOURCE_DIR}/src
             COMMENT "Running clang-tidy"
         )
     endif()

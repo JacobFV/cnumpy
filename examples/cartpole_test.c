@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../cnumpy.h"
-#include "../rl/cnumpy_rl.h"
+#include "../src/cnumpy.h"
+#include "../src/rl/cnumpy_rl.h"
 
 int main() {
     printf("Testing CartPole Environment...\n");

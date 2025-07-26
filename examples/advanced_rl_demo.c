@@ -15,8 +15,8 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#include "../cnumpy.h"
-#include "../rl/cnumpy_rl.h"
+#include "../src/cnumpy.h"
+#include "../src/rl/cnumpy_rl.h"
 
 // ============================================================================
 // Environment Configurations

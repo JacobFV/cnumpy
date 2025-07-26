@@ -1,4 +1,4 @@
-#include "../cnumpy.h"
+#include "../src/cnumpy.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <sys/time.h>
-#include "../cnumpy.h"
-#include "../rl/cnumpy_rl.h"
+#include "../src/cnumpy.h"
+#include "../src/rl/cnumpy_rl.h"
 
 double get_time() {
     struct timeval tv;
